@@ -1,0 +1,4 @@
+ALTER TABLE users ALTER COLUMN github_id DROP NOT NULL;
+ALTER TABLE users ALTER COLUMN github_login DROP NOT NULL;
+ALTER TABLE users ADD COLUMN password_hash VARCHAR(255);
+ALTER TABLE users ADD CONSTRAINT uq_users_email UNIQUE (email);

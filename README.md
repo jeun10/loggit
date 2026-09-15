@@ -29,16 +29,23 @@ docker compose ps   # postgres가 healthy인지 확인
 
 ### 3. 백엔드 실행
 
-Spring Boot는 `.env` 파일을 자동으로 읽지 않으므로, 로컬 실행 전 셸에 값을 로드한다.
+Spring Boot가 저장소 루트의 `.env`를 자동으로 읽고 `local` 프로필을 기본으로 사용한다.
 
 ```
 cd backend
-set -a; source ../.env; set +a
-SPRING_PROFILES_ACTIVE=local ./gradlew bootRun
+./gradlew bootRun
 ```
 
-IntelliJ에서 실행할 경우 EnvFile 플러그인 등으로 `.env`를 로드하고
-Active profile을 `local`로 설정한다 (실행 설정은 직접 구성).
+운영에서는 실제 환경 변수를 배포 플랫폼에 등록하거나 `LOGGIT_ENV_FILE`로
+서버 전용 환경 파일의 경로를 지정한다. 운영 환경에 등록된 값은 파일의 값을
+덮어쓴다.
+
+```
+LOGGIT_ENV_FILE=/etc/loggit/loggit.env SPRING_PROFILES_ACTIVE=prod java -jar backend.jar
+```
+
+IntelliJ에서 Gradle의 `bootRun` 작업을 실행할 때도 별도의 EnvFile 설정 없이
+같은 `.env`를 사용한다.
 
 기동 시 Flyway가 `V1__init_schema.sql`을 적용하고,
 `spring.jpa.hibernate.ddl-auto=validate`로 엔티티-스키마 일치를 검증한다.

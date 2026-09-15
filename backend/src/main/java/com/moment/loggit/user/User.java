@@ -21,14 +21,17 @@ public class User extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "github_id", nullable = false, unique = true)
+    @Column(name = "github_id", unique = true)
     private Long githubId;
 
-    @Column(name = "github_login", nullable = false, length = 100)
+    @Column(name = "github_login", length = 100)
     private String githubLogin;
 
     @Column(length = 255)
     private String email;
+
+    @Column(name = "password_hash", length = 255)
+    private String passwordHash;
 
     @Column(name = "display_name", length = 100)
     private String displayName;
@@ -43,6 +46,14 @@ public class User extends BaseTimeEntity {
         this.githubId = githubId;
         this.githubLogin = githubLogin;
         this.timezone = timezone != null ? timezone : "Asia/Seoul";
+    }
+
+    public static User forEmailSignup(String email, String passwordHash) {
+        User user = new User();
+        user.email = email;
+        user.passwordHash = passwordHash;
+        user.timezone = "Asia/Seoul";
+        return user;
     }
 
     public void updateProfile(String email, String displayName, String avatarUrl) {

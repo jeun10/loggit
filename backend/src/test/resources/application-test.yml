@@ -1,3 +1,7 @@
+jwt:
+  secret: test-only-jwt-signing-secret-never-used-outside-tests-0123456789
+  expiration-minutes: 60
+
 logging:
   level:
     com.moment.loggit: DEBUG
