@@ -1,0 +1,20 @@
+# Secrets
+.env
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+
+# Backend build output
+backend/build/
+backend/.gradle/
+backend/out/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/

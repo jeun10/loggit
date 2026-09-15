@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    show-sql: true
+
+logging:
+  level:
+    com.moment.loggit: DEBUG
+    org.hibernate.SQL: DEBUG
